@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials')
@@ -23,10 +24,10 @@ app.use((req, res, next) => {
   next();
 });
 
-//maintenance page which does not allow other helpers to shot
-app.use((req, res, next) => {
-  res.render('maintenance.hbs');
-});
+// //maintenance page which does not allow other helpers to shot
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs');
+// });
 
 //middleware
 app.use(express.static(__dirname + '/public'));
@@ -57,6 +58,6 @@ app.get('/bad', (req, res) => {
     errorMessage: 'Uable to handle request',
   })
 })
-app.listen(3000, () => {
-  console.log('Server is up o port 3000');
+app.listen(port, () => {
+  console.log(`Server is up o port ${port}`);
 });
